@@ -16,11 +16,12 @@ namespace LuckySpin.Controllers
         /***
          * Controller Constructor
          */
-        public SpinnerController()
+        public SpinnerController(RepoService blarg)
         {
+            repository = blarg;
             //TODO: Inject a RepoService parameter and assign it to the instance variable 'repository'
         }
-
+        
         /***
          * Entry Page Action
          **/
@@ -32,11 +33,9 @@ namespace LuckySpin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(Player player)
-        {
+        public IActionResult Index(Player player){
             //Decide whether to redirect to the Spin Action or return to the Index form view, based on ModelState.IsValid
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid){
                 return RedirectToAction("Spin", player);
             } else {
                 return View();
@@ -47,21 +46,17 @@ namespace LuckySpin.Controllers
          * Spin Action
          **/  
                
-         public IActionResult Spin(Player player)
-        {
-            
+         public IActionResult Spin(Player player){
                 return View("Spin", new Spin { Player = player });
-            
         }
 
         /***
          * ListSpins Action
          **/
 
-         public IActionResult LuckList()
-        {
+         public IActionResult LuckList(){
             //TODO: Pass the repository's PlayerSpins property to the LuckList View
-                return View();
+                return View(repository.PlayerSpins);
         }
 
     }

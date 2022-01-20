@@ -19,6 +19,7 @@ namespace LuckySpin
         {
             services.AddMvc();
             services.AddTransient<TextTransformService>();
+            services.AddSingleton<RepoService>();
             //TODO: Register your new Repo Service as a Singleton; it will hang around in memory between requests
         }
 
