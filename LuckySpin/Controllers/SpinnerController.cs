@@ -34,10 +34,13 @@ namespace LuckySpin.Controllers
         [HttpPost]
         public IActionResult Index(Player player)
         {
-            //TODO: Decide whether to redirect to the Spin Action or return to the Index form view, based on ModelState.IsValid
-
-            return RedirectToAction("Spin", player);
-
+            //Decide whether to redirect to the Spin Action or return to the Index form view, based on ModelState.IsValid
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Spin", player);
+            } else {
+                return View();
+            }
         }
 
         /***
@@ -46,7 +49,9 @@ namespace LuckySpin.Controllers
                
          public IActionResult Spin(Player player)
         {
-            return View("Spin", new Spin { Player = player });
+            
+                return View("Spin", new Spin { Player = player });
+            
         }
 
         /***
